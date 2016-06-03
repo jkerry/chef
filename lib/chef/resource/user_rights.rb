@@ -29,6 +29,7 @@ class Chef
       def initialize(name, run_context = nil)
         super
         @username = name
+        @rights = []
       end
 
       def username(arg = nil)
@@ -36,6 +37,14 @@ class Chef
           :username,
           arg,
           :kind_of => [ String ]
+        )
+      end
+
+      def rights(arg = nil)
+        set_or_return(
+          :rights,
+          arg,
+          :kind_of => [ Array ]
         )
       end
 

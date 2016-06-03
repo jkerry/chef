@@ -22,6 +22,7 @@ describe Chef::Resource::UserRights, "initialize" do
   before(:each) do
     @resource = Chef::Resource::UserRights.new("cthulhu")
   end
+
   it "should create a new Chef::Resource::UserRights" do
     expect(@resource).to be_a_kind_of(Chef::Resource)
     expect(@resource).to be_a_kind_of(Chef::Resource::UserRights)
@@ -35,6 +36,10 @@ describe Chef::Resource::UserRights, "initialize" do
     expect(@resource.username).to eql("cthulhu")
   end
 
+  it "should set the rights to an empty array" do
+    expect(@resource.rights).to eql([])
+  end
+
   it "should have :create as a default action" do
     expect(@resource.action).to eql([:create])
   end
@@ -43,5 +48,20 @@ describe Chef::Resource::UserRights, "initialize" do
     it "should allow action #{action}" do
       expect(@resource.allowed_actions.detect { |a| a == action.to_sym }).to eql(action.to_sym)
     end
+  end
+end
+
+describe Chef::Resource::UserRights, "rights" do
+  before(:each) do
+    @resource = Chef::Resource::UserRights.new("cthulhu")
+  end
+
+  it "should allow an array of strings" do
+    @resource.send("rights", ["Conan"])
+    expect(@resource.send("rights")).to eql(["Conan"])
+  end
+
+  it "should not allow a hash of strings" do
+    expect {@resource.send("rights", {:conan => "What is best in life?"}) }.to raise_error(ArgumentError)
   end
 end
