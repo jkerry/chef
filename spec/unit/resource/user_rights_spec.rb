@@ -26,4 +26,22 @@ describe Chef::Resource::UserRights, "initialize" do
     expect(@resource).to be_a_kind_of(Chef::Resource)
     expect(@resource).to be_a_kind_of(Chef::Resource::UserRights)
   end
+
+  it "should set the resource_name to :user_rights" do
+    expect(@resource.resource_name).to eql(:user_rights)
+  end
+
+  it "should set the username to the name initialize argument" do
+    expect(@resource.username).to eql("cthulhu")
+  end
+
+  it "should have :create as a default action" do
+    expect(@resource.action).to eql([:create])
+  end
+
+  %w{create remove set}.each do |action|
+    it "should allow action #{action}" do
+      expect(@resource.allowed_actions.detect { |a| a == action.to_sym }).to eql(action.to_sym)
+    end
+  end
 end

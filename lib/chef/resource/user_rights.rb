@@ -23,7 +23,11 @@ class Chef
     class UserRights < Chef::Resource
       identity_attr :username
 
+      default_action :create
+      allowed_actions :create, :remove, :set
+
       def initialize(name, run_context = nil)
+        super
         @username = name
       end
 
