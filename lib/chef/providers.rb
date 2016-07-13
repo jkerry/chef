@@ -57,6 +57,7 @@ require "chef/provider/subversion"
 require "chef/provider/systemd_unit"
 require "chef/provider/template"
 require "chef/provider/user"
+require "chef/provider/user_rights"
 require "chef/provider/whyrun_safe_ruby_block"
 require "chef/provider/yum_repository"
 
