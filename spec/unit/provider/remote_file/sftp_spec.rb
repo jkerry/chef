@@ -130,7 +130,7 @@ describe Chef::Provider::RemoteFile::SFTP do
       let(:uri) { URI.parse("sftp://conan:cthu1hu@opscode.com/the/whole/path/seattle.txt") }
 
       it "should fetch the file from the correct path" do
-        expect(sftp).to receive(:download!).with("the/whole/path/seattle.txt", "/tmp/somedir/remote-file-sftp-backend-spec-test")
+        expect(sftp).to receive(:download!).with("/the/whole/path/seattle.txt", "/tmp/somedir/remote-file-sftp-backend-spec-test")
         fetcher.fetch
       end
     end
